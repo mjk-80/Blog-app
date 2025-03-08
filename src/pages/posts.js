@@ -10,6 +10,12 @@ const Post = () => {
         setPosts(savedPosts);
     }, []);
 
+    const handleDelete = (id) => {
+      const updatedPosts = posts.filter(post => post.id !== id);
+      setPosts(updatedPosts);
+      localStorage.setItem('posts', JSON.stringify(updatedPosts));
+    }
+
     return(
         <div style={styles.container}>
             <Head>
@@ -23,6 +29,11 @@ const Post = () => {
                     <li key={post.id} style={styles.postItem}>
                         <h2 style={styles.postTitle}>{post.title}</h2>
                         <p style={styles.postContent}>{post.content}</p>
+                        <button
+                          style={styles.button} 
+                          onClick={()=> handleDelete(post.id)}>
+                          Delete
+                        </button>
                     </li>
                 ))}
             </ul>
@@ -66,6 +77,16 @@ const styles = {
     postContent: {  
       fontSize: '1em',  
       color: '#555',  
+    },
+    button: {  
+      padding: '10px 15px',  
+      fontSize: '1em',  
+      color: '#fff',  
+      backgroundColor: '#0070f3',  
+      border: 'none',  
+      borderRadius: '4px',  
+      cursor: 'pointer',  
+      transition: 'background-color 0.3s',  
     },  
 };
 

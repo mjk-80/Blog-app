@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Navbar from "./components/navbar";
-import { setConfig } from "next/config";
+import { useRouter } from "next/router";
 
 
 const CreatePost = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const router = useRouter();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,6 +24,7 @@ const CreatePost = () => {
 
         setTitle('');
         setContent('');
+        router.push('/posts');
     }
 
 
